@@ -2,17 +2,18 @@ package com.ssc.exercise;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ssc.exercise.exception.InvalidInputException;
-import com.ssc.exercise.service.EncodeStringService;
+import com.ssc.exercise.service.impl.EncodeStringServiceImpl;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class StringEncoderApplicationTests {
 
-	@Autowired
-	EncodeStringService encodeStringService;
+	@InjectMocks
+	EncodeStringServiceImpl encodeStringService;
 	
 	@Test
     void testEncodeStringWithRepetitions() {
@@ -33,12 +34,14 @@ class StringEncoderApplicationTests {
     @Test
     void testEncodeStringWithEmptyString() {
         // Test with an empty string
-        String input = "";
-        //String expected = "Invalid input: null";
+        String input = " ";
+        //String expected = " ";
+        
         //Assertions.assertEquals(expected, encodeStringService.encodeString(input));
         Assertions.assertThrows(InvalidInputException.class, () -> {
         	encodeStringService.encodeString(input);
         });
+        
     }
 
     @Test

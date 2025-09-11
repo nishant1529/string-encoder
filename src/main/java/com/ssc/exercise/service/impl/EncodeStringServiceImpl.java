@@ -20,7 +20,7 @@ public class EncodeStringServiceImpl implements EncodeStringService {
 		StringBuilder result = new StringBuilder();
 		
 		int count = 1;
-		if(str == null || str.isEmpty()) {
+		if(StringUtils.isBlank(str)) {
 			throw new InvalidInputException("Invalid input: " + str);
 		} else {
 			for (int i = 1; i <= str.length(); i++) {
@@ -42,7 +42,7 @@ public class EncodeStringServiceImpl implements EncodeStringService {
 	public String encodeStringUsingStream(String str) throws InvalidInputException {
 		StringBuilder result = new StringBuilder();
 	    
-		if (str == null || str.isEmpty()) {
+		if (StringUtils.isBlank(str)) {
 			throw new InvalidInputException("Invalid input: " + str);
 	    } else {
 	    	IntStream.range(0, str.length())
@@ -67,7 +67,7 @@ public class EncodeStringServiceImpl implements EncodeStringService {
 	public String encodeStringUsingStreamAndRegex(String str) throws InvalidInputException {
 		String result =  "";
 
-		if(!StringUtils.isEmpty(str)) {
+		if(!StringUtils.isBlank(str)) {
 			result = Arrays.stream(str.split("(?<=(.))(?!\\1)"))
 	                .map(s -> s.charAt(0) + String.valueOf(s.length()))
 	                .collect(Collectors.joining());
